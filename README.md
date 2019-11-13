@@ -11,11 +11,11 @@ author: 350137278@qq.com
 
 - gcc source
 
-	[gcc-6.4.0.tar.xz](https://mirrors.tuna.tsinghua.edu.cn/gnu/gcc/)
+    [gcc-6.4.0.tar.xz](https://mirrors.tuna.tsinghua.edu.cn/gnu/gcc/)
     
 - cmake bin
 
-	[cmake-3.14.7](https://cmake.org/files/v3.14/cmake-3.14.7-Linux-x86_64.sh)
+    [cmake-3.14.7](https://cmake.org/files/v3.14/cmake-3.14.7-Linux-x86_64.sh)
 
 - dependencies for gcc
 
@@ -29,7 +29,7 @@ author: 350137278@qq.com
 
  - 3rd-party libraries
  
- 	[leveldb](https://github.com/google/leveldb)
+    [leveldb](https://github.com/google/leveldb)
     
     [RedisGraph](https://github.com/RedisGraph/RedisGraph)
 
@@ -39,12 +39,12 @@ author: 350137278@qq.com
 
 - gmp
 
-	    # tar xvf gmp-6.1.2.tar.bz2
-    	# cd gmp-6.1.2
-      	# ./configure --prefix=/usr/local/gmp-6.1.2
-      	# make
-      	# make install
-      	# ln -s /usr/local/gmp-6.1.2 /usr/local/gmp
+        # tar xvf gmp-6.1.2.tar.bz2
+        # cd gmp-6.1.2
+        # ./configure --prefix=/usr/local/gmp-6.1.2
+        # make
+        # make install
+        # ln -s /usr/local/gmp-6.1.2 /usr/local/gmp
 
 - mpfr
 
@@ -66,7 +66,7 @@ author: 350137278@qq.com
 
 ## 3. Build gcc-6.4.0
 
-		# export LD_LIBRARY_PATH=/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
+        # export LD_LIBRARY_PATH=/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
 
         # tar xvf gcc-6.4.0.tar.xz
         # cd gcc-6.4.0
@@ -83,7 +83,7 @@ author: 350137278@qq.com
 
 ## 4. Install cmake-3.14.7-Linux-x86_64.sh
 
-		# chmod +x cmake-3.14.7-Linux-x86_64.sh
+        # chmod +x cmake-3.14.7-Linux-x86_64.sh
         # ./cmake-3.14.7-Linux-x86_64.sh
         # cmake --version
 
@@ -94,17 +94,19 @@ see also: [leveldb‘⁄Windows∫ÕLinux…œ±‡“Î](https://blog.csdn.net/ubuntu64fan/arti
 
 build linux static release lib:  xbuild/libleveldb.a
 
-        # export CC=/usr/local/gcc/bin/gcc
-		# export CXX=/usr/local/gcc/bin/g++
-		# export PATH=/usr/local/gcc/bin:$PATH
-		# export LD_LIBRARY_PATH=/usr/local/gcc/lib64:/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
+        # source buildenv.conf
 
-		# tar -zxf leveldb.tar.gz
+        # tar -zxf leveldb.tar.gz
         # cd leveldb
         # mkdir xbuild
         # cd xbuild
         # cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
+copy out headers and static lib:
+
+        # cd ..
+        # cp xbuild/libleveldb.a /path/to/libs/lib/
+        # cp -r include/leveldb /path/to/libs/include/
 
 ## 6. Build RedisGraph on rhel6
 
@@ -114,7 +116,7 @@ build redis module (linux dynamic release so):src/redisgraph.so
 
 - install peg/leg first
 
-		# tar -zxf peg-0.1.18.tar.gz
+        # tar -zxf peg-0.1.18.tar.gz
         # cd peg-0.1.18
         # make
         # make install
@@ -126,6 +128,6 @@ build redis module (linux dynamic release so):src/redisgraph.so
         # export PATH=/usr/local/gcc/bin:$PATH
         # export LD_LIBRARY_PATH=/usr/local/gcc/lib64:/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
 
-		# tar -zxf RedisGraph-2.0.0.tar.gz
+        # tar -zxf RedisGraph-2.0.0.tar.gz
         # cd RedisGraph
         # make
