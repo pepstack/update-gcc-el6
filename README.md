@@ -92,21 +92,41 @@ author: 350137278@qq.com
 
 see also: [leveldb在Windows和Linux上编译](https://blog.csdn.net/ubuntu64fan/article/details/102932752)
 
-build linux static release lib:  xbuild/libleveldb.a
+- build linux static release lib ONLY for C++:  xbuild/libleveldb.a
+
+(C++ 语言可以链接到静态库libleveldb.a上的)
 
         # source buildenv.conf
 
         # tar -zxf leveldb.tar.gz
-        # cd leveldb
+        # cd leveldb/
         # mkdir xbuild
         # cd xbuild
         # cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
-copy out headers and static lib:
+optionally copy out headers and static lib:
 
-        # cd ..
-        # cp xbuild/libleveldb.a /path/to/libs/lib/
+        # cd leveldb/
         # cp -r include/leveldb /path/to/libs/include/
+        # cp xbuild/libleveldb.a /path/to/libs/lib/
+
+- build linux shared release dll for both C and C++:  libleveldb.so
+
+(C 语言一定是要链接到动态库libleveldb.so上的： -lleveldb)
+
+        # cd leveldb/
+        # cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=on .
+        # make all
+
+optionally copy out headers and shared dll:
+
+        # cd leveldb/
+        # cp -r include/leveldb /path/to/libs/include/
+        # cp libleveldb.so.1.22.0 /path/to/libs/lib/
+        # cd /path/to/libs/lib/
+        # ln -s libleveldb.so.1.22.0 libleveldb.so.1
+        # ln -s libleveldb.so.1 libleveldb.so
+
 
 ## 6. Build RedisGraph on rhel6
 
