@@ -112,7 +112,7 @@ optionally copy out headers and static lib:
 
 - build linux shared release dll for both C and C++:  libleveldb.so
 
-(C 语言一定是要链接到动态库libleveldb.so上的： -lleveldb)
+(C 语言一定是要链接到动态库libleveldb.so上的：LDFLAGS = -lleveldb)
 
         # cd leveldb/
         # cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=on .
