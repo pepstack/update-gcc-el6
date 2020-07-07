@@ -1,4 +1,4 @@
-# UPDATE GCC On RHEL6 (x64)
+# Offline Installation of GCC On RHEL6 (x64)
 
 This document was powered by [markdown-editor](https://jbt.github.io/markdown-editor/)
 
