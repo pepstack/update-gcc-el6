@@ -200,11 +200,11 @@ build redis module (linux dynamic release so):src/redisgraph.so
 
         $ tar -zcf RedisGraph-2.2.15.tar.gz RedisGraph/
 
-    构建 RedisGraph.so:
+    构建 RedisGraph.so (系统时间必须准确, 否则出现警告: warning:  Clock skew detected.  Your build may be incomplete):
 
         # tar -zxf RedisGraph-$ver.tar.gz
         # cd RedisGraph/
-        # make
+        # make (不可以 make -j 8)
 
     RedisGraph/src/redisgraph.so 生成备用. 参考:
 
