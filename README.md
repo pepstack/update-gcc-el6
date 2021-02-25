@@ -1,17 +1,27 @@
-# Offline Installation of GCC On RHEL6 (x64)
+# Offline Installation of GCC On RHEL6, CentOS7 (x64)
 
 This document was powered by [markdown-editor](https://jbt.github.io/markdown-editor/)
 
-reference: [°²×°GCC-8.3.0¼°ÆäÒÀÀµ](https://www.cnblogs.com/aquester/p/10799125.html)
+reference: [å®‰è£…GCC-8.3.0åŠå…¶ä¾èµ–](https://www.cnblogs.com/aquester/p/10799125.html)
 
 author: 350137278@qq.com
 
+åœ¨ redhat6.4 å’Œ centos7.x ä¸Šæµ‹è¯•æˆåŠŸ.
+
+
+## 0. Prepare base
+
+        # yum -y install centos-release-scl cc-g++ build-essentials
 
 ## 1. Downloads all packages
 
 - gcc source
 
     [gcc-6.4.0.tar.xz](https://mirrors.tuna.tsinghua.edu.cn/gnu/gcc/)
+
+or
+
+    [gcc-7.4.0.tar.xz](https://mirrors.tuna.tsinghua.edu.cn/gnu/gcc/)
     
 - cmake bin
 
@@ -64,7 +74,7 @@ author: 350137278@qq.com
         # make install
         # ln -s /usr/local/mpc-1.1.0 /usr/local/mpc
 
-## 3. Build gcc-6.4.0
+## 3. Build gcc-6.4.0 (or: gcc-7.4.0)
 
         # export LD_LIBRARY_PATH=/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
 
@@ -88,13 +98,13 @@ author: 350137278@qq.com
         # cmake --version
 
 
-## 5. Build leveldb on rhel6
+## 5. Build leveldb on rhel6/centos7
 
-see also: [leveldbÔÚWindowsºÍLinuxÉÏ±àÒë](https://blog.csdn.net/ubuntu64fan/article/details/102932752)
+see also: [leveldbåœ¨Windowså’ŒLinuxä¸Šç¼–è¯‘](https://blog.csdn.net/ubuntu64fan/article/details/102932752)
 
 - build linux static release lib ONLY for C++:  xbuild/libleveldb.a
 
-(C++ ÓïÑÔ¿ÉÒÔÁ´½Óµ½¾²Ì¬¿âlibleveldb.aÉÏµÄ)
+(C++ è¯­è¨€å¯ä»¥é“¾æ¥åˆ°é™æ€åº“libleveldb.aä¸Šçš„)
 
         # source buildenv.conf
 
@@ -112,7 +122,7 @@ optionally copy out headers and static lib:
 
 - build linux shared release dll for both C and C++:  libleveldb.so
 
-(C ÓïÑÔÒ»¶¨ÊÇÒªÁ´½Óµ½¶¯Ì¬¿âlibleveldb.soÉÏµÄ£ºLDFLAGS = -lleveldb)
+(C è¯­è¨€ä¸€å®šæ˜¯è¦é“¾æ¥åˆ°åŠ¨æ€åº“libleveldb.soä¸Šçš„ï¼šLDFLAGS = -lleveldb)
 
         # cd leveldb/
         # cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=on .
@@ -141,7 +151,31 @@ build redis module (linux dynamic release so):src/redisgraph.so
         # make
         # make install
 
-- build RedisGraph.so then
+- build RedisGraph.so
+
+    å¦‚æœæ²¡æœ‰ RedisGraph-verno.tar.gz, å…ˆä¸‹è½½:
+        $ git clone git@github.com:RedisGraph/RedisGraph.git
+        $ cd RedisGraph
+        
+        ä¸‹è½½å…¨éƒ¨tag
+
+        $ git fetch --tags
+        
+        æ˜¾ç¤ºå…¨éƒ¨ tag
+
+        $ git tag
+
+        åˆ‡æ¢åˆ°æŸä¸ª tag
+
+        $ git checkout v2.2.15
+        
+        æ‰“åŒ…æ­¤ tag ä¸‹çš„å…¨éƒ¨ä»£ç 
+        
+        $ cd ../
+
+        $ tar -zcf RedisGraph-2.2.15.tar.gz RedisGraph/
+
+    æ„å»º RedisGraph.so:
 
         # export CC=/usr/local/gcc/bin/gcc
         # export CXX=/usr/local/gcc/bin/g++
