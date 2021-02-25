@@ -1,6 +1,7 @@
-# 必须升级好gcc后运行此文件！
-#   source $file
-
+# buildenv.sh
+# 2021-02-25
+# /etc/profile.d/buildenv.sh
+# source /etc/profile.d/buildenv.sh
 export CC=/usr/local/gcc/bin/gcc
 export CXX=/usr/local/gcc/bin/g++
 export PATH=/usr/local/gcc/bin:/usr/local/cmake/bin:$PATH

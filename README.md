@@ -102,7 +102,7 @@ or
 
 ## 5. Build leveldb on rhel6/centos7
 
-        # source buildenv.conf
+        # source buildenv.sh
 
 see also: [leveldb在Windows和Linux上编译](https://blog.csdn.net/ubuntu64fan/article/details/102932752)
 
@@ -146,7 +146,7 @@ see also: [RedisGraph](https://oss.redislabs.com/redisgraph/) - a graph database
 
 build redis module (linux dynamic release so):src/redisgraph.so
 
-        # source buildenv.conf
+        # source buildenv.sh
 
         # gcc --version
         
@@ -209,3 +209,7 @@ build redis module (linux dynamic release so):src/redisgraph.so
     RedisGraph/src/redisgraph.so 生成备用. 参考:
 
         https://github.com/RedisGraph/RedisGraph
+
+## 7. 永久启用升级后的 gcc
+
+    Copy buildenv.sh to /etc/profile.d/ and source
