@@ -94,11 +94,15 @@ or
 ## 4. Install cmake-3.14.7-Linux-x86_64.sh
 
         # chmod +x cmake-3.14.7-Linux-x86_64.sh
-        # ./cmake-3.14.7-Linux-x86_64.sh
+        # ./cmake-3.14.7-Linux-x86_64.sh --prefix=/usr/local
+        # ln -s /usr/local/cmake-3.14.7-Linux-x86_64 /usr/local/cmake
+        # export PATH=/usr/local/gcc/bin:/usr/local/cmake/bin:$PATH
         # cmake --version
 
 
 ## 5. Build leveldb on rhel6/centos7
+
+        # source buildenv.conf
 
 see also: [leveldb在Windows和Linux上编译](https://blog.csdn.net/ubuntu64fan/article/details/102932752)
 
@@ -106,15 +110,13 @@ see also: [leveldb在Windows和Linux上编译](https://blog.csdn.net/ubuntu64fan
 
 (C++ 语言可以链接到静态库libleveldb.a上的)
 
-        # source buildenv.conf
-
         # tar -zxf leveldb.tar.gz
         # cd leveldb/
         # mkdir xbuild
         # cd xbuild
         # cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
-optionally copy out headers and static lib:
+Optionally copy out headers and static lib:
 
         # cd leveldb/
         # cp -r include/leveldb /path/to/libs/include/
@@ -128,7 +130,7 @@ optionally copy out headers and static lib:
         # cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=on .
         # make all
 
-optionally copy out headers and shared dll:
+Optionally copy out headers and shared dll:
 
         # cd leveldb/
         # cp -r include/leveldb /path/to/libs/include/
@@ -138,11 +140,26 @@ optionally copy out headers and shared dll:
         # ln -s libleveldb.so.1 libleveldb.so
 
 
-## 6. Build RedisGraph on rhel6
+## 6. Build RedisGraph on rhel6, centos7
 
 see also: [RedisGraph](https://oss.redislabs.com/redisgraph/) - a graph database module for Redis
 
 build redis module (linux dynamic release so):src/redisgraph.so
+
+        # source buildenv.conf
+
+        # gcc --version
+        
+        gcc (GCC) 7.4.0
+        Copyright (C) 2017 Free Software Foundation, Inc.
+        This is free software; see the source for copying conditions.  There is NO
+        warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        
+        # cmake --version
+
+        cmake version 3.14.7
+        CMake suite maintained and supported by Kitware (kitware.com/cmake).        
+
 
 - install peg/leg first
 
@@ -153,10 +170,18 @@ build redis module (linux dynamic release so):src/redisgraph.so
 
 - build RedisGraph.so
 
-    如果没有 RedisGraph-verno.tar.gz, 先下载:
-        $ git clone git@github.com:RedisGraph/RedisGraph.git
+    如果没有 RedisGraph-$ver.tar.gz, 先下载:
+
+        $ git clone --recurse-submodules -j8 git@github.com:RedisGraph/RedisGraph.git
+
+    打包 RedisGraph 全部代码:
+    
+        $ tar -zcf RedisGraph-20210225.tar.gz RedisGraph/
+
+    如果需要切换到指定的tag:
+
         $ cd RedisGraph
-        
+
         下载全部tag
 
         $ git fetch --tags
@@ -170,18 +195,17 @@ build redis module (linux dynamic release so):src/redisgraph.so
         $ git checkout v2.2.15
         
         打包此 tag 下的全部代码
-        
+
         $ cd ../
 
         $ tar -zcf RedisGraph-2.2.15.tar.gz RedisGraph/
 
     构建 RedisGraph.so:
 
-        # export CC=/usr/local/gcc/bin/gcc
-        # export CXX=/usr/local/gcc/bin/g++
-        # export PATH=/usr/local/gcc/bin:$PATH
-        # export LD_LIBRARY_PATH=/usr/local/gcc/lib64:/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
-
-        # tar -zxf RedisGraph-2.0.0.tar.gz
-        # cd RedisGraph
+        # tar -zxf RedisGraph-$ver.tar.gz
+        # cd RedisGraph/
         # make
+
+    RedisGraph/src/redisgraph.so 生成备用. 参考:
+
+        https://github.com/RedisGraph/RedisGraph
