@@ -11,7 +11,9 @@ author: 350137278@qq.com
 
 ## 0. Prepare base
 
-        # yum -y install centos-release-scl cc-g++ build-essentials
+    (如果更改了 /etc/yum.repos.d/ 下面的 repo, 需要: yum clean all)
+
+        # yum -y install centos-release-scl gcc-g++ build-essentials
 
 ## 1. Downloads all packages
 
@@ -52,8 +54,7 @@ or
         # tar xvf gmp-6.1.2.tar.bz2
         # cd gmp-6.1.2
         # ./configure --prefix=/usr/local/gmp-6.1.2
-        # make
-        # make install
+        # make && sudo make install
         # ln -s /usr/local/gmp-6.1.2 /usr/local/gmp
 
 - mpfr
@@ -61,8 +62,7 @@ or
         # tar xzf  mpfr-4.0.2.tar.gz
         # cd mpfr-4.0.2
         # ./configure --prefix=/usr/local/mpfr-4.0.2 --with-gmp=/usr/local/gmp
-        # make
-        # make install
+        # make && sudo make install
         # ln -s /usr/local/mpfr-4.0.2 /usr/local/mpfr
 
 - mpc
@@ -70,8 +70,7 @@ or
         # tar xzf  mpc-1.1.0.tar.gz
         # cd mpc-1.1.0
         # ./configure --prefix=/usr/local/mpc-1.1.0 --with-gmp=/usr/local/gmp --with-mpfr=/usr/local/mpfr
-        # make
-        # make install
+        # make && sudo make install
         # ln -s /usr/local/mpc-1.1.0 /usr/local/mpc
 
 ## 3. Build gcc-6.4.0 (or: gcc-7.4.0)
