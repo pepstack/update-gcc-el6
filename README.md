@@ -73,17 +73,27 @@ or
         # make && sudo make install
         # ln -s /usr/local/mpc-1.1.0 /usr/local/mpc
 
-## 3. Build gcc-6.4.0 (or: gcc-7.4.0)
+## 3. Build gcc
+
+    - gcc-6.4.0
 
         # export LD_LIBRARY_PATH=/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
-
         # tar xvf gcc-6.4.0.tar.xz
         # cd gcc-6.4.0
         # ./configure --prefix=/usr/local/gcc-6.4.0 --with-mpfr=/usr/local/mpfr --with-gmp=/usr/local/gmp --with-mpc=/usr/local/mpc --disable-multilib
-        # make
-        # make install
+        # make && sudo make install
         # ln -s /usr/local/gcc-6.4.0 /usr/local/gcc
 
+    - or gcc-7.4.0
+
+        # export LD_LIBRARY_PATH=/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
+        # tar xvf gcc-7.4.0.tar.xz
+        # cd gcc-7.4.0
+        # ./configure --prefix=/usr/local/gcc-7.4.0 --with-mpfr=/usr/local/mpfr --with-gmp=/usr/local/gmp --with-mpc=/usr/local/mpc --disable-multilib
+        # make && sudo make install
+        # ln -s /usr/local/gcc-7.4.0 /usr/local/gcc
+
+    then:
 
         # export PATH=/usr/local/gcc/bin:$PATH
         # export LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH
