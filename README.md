@@ -93,20 +93,23 @@ or
         # make && sudo make install
         # ln -s /usr/local/gcc-7.4.0 /usr/local/gcc
 
-    then:
-
-        # export PATH=/usr/local/gcc/bin:$PATH
-        # export LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH
-        # export MANPATH=/usr/local/gcc/share/man:$MANPATH
-        # gcc --version
-
 ## 4. Install cmake-3.14.7-Linux-x86_64.sh
 
         # chmod +x cmake-3.14.7-Linux-x86_64.sh
         # ./cmake-3.14.7-Linux-x86_64.sh --prefix=/usr/local
         # ln -s /usr/local/cmake-3.14.7-Linux-x86_64 /usr/local/cmake
-        # export PATH=/usr/local/gcc/bin:/usr/local/cmake/bin:$PATH
-        # cmake --version
+
+then create file as below:
+
+        # buildenv.sh
+        # 2021-02-25
+        # /etc/profile.d/buildenv.sh
+        # source /etc/profile.d/buildenv.sh
+        export CC=/usr/local/gcc/bin/gcc
+        export CXX=/usr/local/gcc/bin/g++
+        export PATH=/usr/local/gcc/bin:/usr/local/cmake/bin:$PATH
+        export LD_LIBRARY_PATH=/usr/local/gcc/lib64:/usr/local/gmp/lib:/usr/local/mpfr/lib:/usr/local/mpc/lib:$LD_LIBRARY_PATH
+        export MANPATH=/usr/local/gcc/share/man:$MANPATH
 
 
 ## 5. Build leveldb on rhel6/centos7
